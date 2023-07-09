@@ -1,0 +1,4 @@
+azure.identity==1.8.0
+msgraph.core==0.2.2
+azure-keyvault-secrets==4.3.0
+azure-monitor-ingestion==1.0.2
