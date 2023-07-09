@@ -1,5 +1,14 @@
 import os
 
+import logging
+
+#################################################################
+# CONFIGURE LOGGING
+#################################################################
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+FORMAT = '%(asctime)s %(levelname)s:         %(message)s'
+logging.basicConfig(format=FORMAT, level=logging.getLevelName(LOG_LEVEL))
+
 print("----------------- INITIALIZING --------------------")
 #################################################################
 # GENERAL
@@ -48,11 +57,11 @@ if SCRIPT_BEHAVIOUR == "keyvault":
     if not AZURE_KEYVAULT_URI:
         raise ValueError("AZURE_KEYVAULT_URI must be set if SCRIPT_BEHAVIOUR=keyvault")
 
-CREATE_NEW_SECRET = os.getenv("CREATE_NEW_SECRET")
+CREATE_NEW_SECRET = os.getenv("CREATE_NEW_SECRET", "true")
 if CREATE_NEW_SECRET not in ["true", "false"]:
     raise ValueError("CREATE_NEW_SECRET must be set to true or false")
 
-DELETE_OLD_SECRET = os.getenv("DELETE_OLD_SECRET")
+DELETE_OLD_SECRET = os.getenv("DELETE_OLD_SECRET", "false")
 if DELETE_OLD_SECRET not in ["true", "false"]:
     raise ValueError("DELETE_OLD_SECRET must be set to true or false")
 
